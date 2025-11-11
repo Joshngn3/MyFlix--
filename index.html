@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MyFlix — Home</title>
+
+  <!-- Bootstrap & Icons (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- App CSS -->
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-danger" href="index.html">
+        <i class="bi bi-camera-reels-fill me-1"></i>MyFlix
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
+              aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-2 me-auto">
+          <li class="nav-item"><a id="nav-home" class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a id="nav-movies" class="nav-link" href="movies.html">Movies</a></li>
+          <li class="nav-item"><a id="nav-series" class="nav-link" href="series.html">Series</a></li>
+          <li class="nav-item"><a id="nav-mylist" class="nav-link" href="mylist.html">My List</a></li>
+        </ul>
+        <a class="btn btn-outline-light btn-sm" href="login.html">
+          <i class="bi bi-person"></i> Sign In
+        </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container hero-content text-center">
+      <h1 class="display-4 fw-bold mb-3">Unlimited movies, TV series, and more.</h1>
+      <p class="lead mb-4">Watch anywhere. Cancel anytime.</p>
+      <form class="row g-2 justify-content-center email-form" onsubmit="event.preventDefault();">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+          <input type="email" required class="form-control form-control-lg" placeholder="Enter your email" />
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-accent btn-lg">Get Started <i class="bi bi-chevron-right"></i></button>
+        </div>
+      </form>
+      <div class="mt-5 text-muted small">Ready to watch? Enter your email to create or restart your membership.</div>
+    </div>
+  </header>
+
+  <!-- TRENDING (row horizontal tanpa ranking) -->
+<section class="section">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <div class="row-title m-0">Trending Now</div>
+    <div class="d-flex gap-2">
+      <button id="trendPrev" class="btn btn-outline-light btn-sm" aria-label="Prev">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button id="trendNext" class="btn btn-outline-light btn-sm" aria-label="Next">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="trend-rail">
+    <!-- Poster statis: tinggal ganti src & judul -->
+    <article class="poster-card">
+      <img src="img/interstellar.jpeg" alt="Interstellar">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">Interstellar</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="Interstellar" data-img="img/interstellar.jpeg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="poster-card">
+      <img src="img/avatar.jpeg" alt="Avatar">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">Avatar</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="Avatar" data-img="img/avatar.jpeg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="poster-card">
+      <img src="img/joker.jpeg" alt="Joker">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">Joker</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="Joker" data-img="img/joker.jpeg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="poster-card">
+      <img src="img/blackpanther.jpeg" alt="Black Panther">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">Black Panther</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="Black Panther" data-img="img/blackpanther.jpeg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="poster-card">
+      <img src="img/inception.jpeg" alt="Inception">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">Inception</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="Inception" data-img="img/inception.jpeg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="poster-card">
+      <img src="img/strangerthings.jpeg" alt="Stranger Things">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">Stranger Things</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="Stranger Things" data-img="img/strangerthings.jpeg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+        <article class="poster-card">
+      <img src="img/traintobusan.jpg" alt="Train to Busan">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">Train to Busan</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="Train to Busan" data-img="img/traintobusan.jpg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+  <!-- MODAL DETAIL -->
+  <div class="modal fade" id="titleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content bg-dark text-light rounded-4">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="mTitle"></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <img id="mImg" class="w-100 rounded-3 mb-3" alt="">
+          <div class="d-flex flex-wrap gap-2 mb-2 small" id="mMeta"></div>
+          <p class="mb-3 text-muted" id="mDesc"></p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-accent"><i class="bi bi-play-fill"></i> Play</button>
+            <button id="mAdd" class="btn btn-outline-light"><i class="bi bi-plus-lg"></i> My List</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-5 py-5">
+    <div class="container small">
+      <p class="mb-4">Questions? Call 0800-123-456 (demo)</p>
+      <div class="row g-3">
+        <div class="col-6 col-md-3 d-grid gap-2">
+          <a class="footer-link" href="#">FAQ</a>
+          <a class="footer-link" href="#">Investor Relations</a>
+          <a class="footer-link" href="#">Privacy</a>
+          <a class="footer-link" href="#">Speed Test</a>
+        </div>
+        <div class="col-6 col-md-3 d-grid gap-2">
+          <a class="footer-link" href="#">Help Center</a>
+          <a class="footer-link" href="#">Jobs</a>
+          <a class="footer-link" href="#">Cookie Preferences</a>
+          <a class="footer-link" href="#">Legal Notices</a>
+        </div>
+        <div class="col-6 col-md-3 d-grid gap-2">
+          <a class="footer-link" href="#">Account</a>
+          <a class="footer-link" href="#">Ways to Watch</a>
+          <a class="footer-link" href="#">Corporate Info</a>
+          <a class="footer-link" href="#">Only on MyFlix</a>
+        </div>
+        <div class="col-6 col-md-3 d-grid gap-2">
+          <a class="footer-link" href="#">Media Center</a>
+          <a class="footer-link" href="#">Terms of Use</a>
+          <a class="footer-link" href="#">Contact Us</a>
+        </div>
+      </div>
+      <div class="mt-4">MyFlix Indonesia (Demo)</div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+ <script>
+  // ===== Fallback jika app.js belum mendefinisikan Favorites =====
+  (function ensureFavAPI(){
+    if (typeof window.getFavorites !== 'function') {
+      const FAV_KEY = 'myflix:favorites';
+      window.getFavorites = () => JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+      window.setFavorites = (arr) => localStorage.setItem(FAV_KEY, JSON.stringify(arr));
+      window.isFav = (item) => getFavorites().some(f => f.img === item.img && f.title === item.title);
+      window.toggleFav = (item) => {
+        const favs = getFavorites();
+        const idx = favs.findIndex(f => f.img === item.img && f.title === item.title);
+        if (idx === -1) favs.push(item); else favs.splice(idx, 1);
+        setFavorites(favs);
+      };
+      console.warn('[FavAPI] memakai fallback lokalStorage sederhana.');
+    }
+  })();
+</script>
+<script>
+  // Geser rail dengan tombol
+  document.addEventListener('DOMContentLoaded', () => {
+    const rail = document.querySelector('.trend-rail');
+    const prev = document.getElementById('trendPrev');
+    const next = document.getElementById('trendNext');
+    if (rail && prev && next) {
+      const step = () => Math.max(rail.clientWidth * 0.9, 300);
+      prev.addEventListener('click', (e) => { e.preventDefault(); rail.scrollBy({left:-step(),behavior:'smooth'}); });
+      next.addEventListener('click', (e) => { e.preventDefault(); rail.scrollBy({left: step(),behavior:'smooth'}); });
+    }
+  });
+
+  // Delegasi tombol "+" → My List
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-fav');
+    if (!btn) return;
+    const item = { title: btn.dataset.title, img: btn.dataset.img };
+    toggleFav(item); // simpan ke localStorage
+
+    // Update tampilan tombol di kartu yang diklik
+    const added = isFav(item);
+    const icon = btn.querySelector('i');
+    if (icon) icon.className = added ? 'bi bi-check-lg' : 'bi bi-plus-lg';
+    btn.classList.toggle('btn-outline-light', !added);
+    btn.classList.toggle('btn-light', added);
+  });
+</script>
+
+</body>
+</html>
