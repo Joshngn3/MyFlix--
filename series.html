@@ -155,7 +155,7 @@
         </div>
       </div>
 
-      <div id="row-movies" class="trend-rail" tabindex="0" aria-label="Popular Movies list">
+      <div id="row-movies" class="trend-rail" tabindex="0" aria-label="Popular Series list">
         <!-- cards akan di-render oleh JS -->
       </div>
     </section>
@@ -167,12 +167,12 @@
       <p class="mb-4">Questions? Call 0823-4677-8105</p>
       <div class="row g-3">
         <div class="col-6 col-md-3 d-grid gap-2">
-          <a class="footer-link" href="#">Help Center</a>
-          <a class="footer-link" href="#">Cookie Preferences</a>
+          <a class="footer-link" href="help-center.html">Help Center</a>
+          <a class="footer-link" href="cookie-preferences.html">Cookie Preferences</a>
         </div>
         <div class="col-6 col-md-3 d-grid gap-2">
-          <a class="footer-link" href="#">Terms of Use</a>
-          <a class="footer-link" href="#">Contact Us</a>
+          <a class="footer-link" href="terms-of-use.html">Terms of Use</a>
+          <a class="footer-link" href="contact-use.html">Contact Us</a>
         </div>
       </div>
       <div class="mt-4">MyFlix Indonesia</div>
@@ -183,48 +183,62 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    /**** DATA (daftar film yang kamu kirim) ****/
-    const movies = [
+    /**** DATA (daftar series yang kamu kirim) ****/
+    const series = [
       { title: "Stranger Things", img: "img/strangerthings.jpg", eps: "8 Eps", isNew: true },
       { title: "Stranger Things 2", img: "img/strangerthings2.jpg", eps: "9 Eps", isNew: true },
       { title: "Stranger Things 3", img: "img/strangerthings3.jpg", eps: "8 Eps", isNew: true },
       { title: "Stranger Things 4", img: "img/strangerthings4.jpg", eps: "9 Eps", isNew: true },
       { title: "Stranger Things 5", img: "img/strangerthings5.jpg", eps: "8 Eps", isNew: true },
       { title: "The Witcher", img: "img/thewithcer.jpg", eps: "8 Eps", isNew: true },
-      { title: "The Witcher 2", img: "img/thewithcer2.jpg", eps: "8 Eps", isNew: true },
+      { title: "The Witcher 2", img: "img/thewithcer2.jpg", eps: "8 Eps", isNew: true }
     ];
+
+    /**** Trailer map (tambahkan ID YouTube yang valid sesuai judul) ****/
+    const TRAILER_MAP = {
+      "Stranger Things": "b9EkMc79ZSU",
+      "Stranger Things 2": "R1ZXOOLMJ8s?si",   // ganti dengan ID trailer sebenarnya
+      "Stranger Things 3": "e4XvO7DItmc?si",
+      "Stranger Things 4": "sBEvEcpnG7k?si",
+      "Stranger Things 5": "PssKpzB0Ah0?si",
+      "The Witcher": "ndl1W4ltcmg?si",
+      "The Witcher 2": "2aMVzFlApa0?s"
+    };
 
     /**** Rendering otomatis kartu poster ****/
     function renderRow(elementId, items) {
       const row = document.getElementById(elementId);
       row.innerHTML = "";
 
-      items.forEach(movie => {
+      items.forEach(item => {
+        // jika TRAILER_MAP punya ID, set data-trailer (hanya ID)
+        const hasTrailer = !!TRAILER_MAP[item.title];
         const article = document.createElement('article');
         article.className = 'poster-card';
+        if (hasTrailer) article.setAttribute('data-trailer', TRAILER_MAP[item.title]);
 
         article.innerHTML = `
-          <div class="poster-thumb" role="group" aria-label="${escapeHtml(movie.title)} poster">
-            <img src="${escapeHtml(movie.img)}" alt="${escapeHtml(movie.title)}">
-            ${movie.isNew ? '<div class="badge-new">New</div>' : ''}
-            <div class="eps-count">${escapeHtml(movie.eps)}</div>
+          <div class="poster-thumb" role="group" aria-label="${escapeHtml(item.title)} poster">
+            <img src="${escapeHtml(item.img)}" alt="${escapeHtml(item.title)}">
+            ${item.isNew ? '<div class="badge-new">New</div>' : ''}
+            <div class="eps-count">${escapeHtml(item.eps)}</div>
 
             <div class="poster-actions">
-              <button class="btn btn-outline-light btn-sm btn-fav" data-title="${escapeHtml(movie.title)}" data-img="${escapeHtml(movie.img)}" title="Add to My List">
+              <button class="btn btn-outline-light btn-sm btn-fav" data-title="${escapeHtml(item.title)}" data-img="${escapeHtml(item.img)}" title="Add to My List">
                 <i class="bi bi-plus-lg"></i>
               </button>
             </div>
 
             <div class="play-overlay">
-              <button class="btn-play-center" data-title="${escapeHtml(movie.title)}">
+              <button class="btn-play-center" data-title="${escapeHtml(item.title)}">
                 <i class="bi bi-play-fill"></i> Play
               </button>
             </div>
           </div>
 
           <div>
-            <div class="poster-title">${escapeHtml(movie.title)}</div>
-            <div class="poster-sub">${escapeHtml(movie.eps)}</div>
+            <div class="poster-title">${escapeHtml(item.title)}</div>
+            <div class="poster-sub">${escapeHtml(item.eps)}</div>
           </div>
         `;
 
@@ -257,6 +271,24 @@
       }
     })();
 
+    /**** Helper YouTube ID finder (bisa dari ID atau URL) ****/
+    function getYouTubeID(input) {
+      if (!input) return "";
+      input = String(input).trim();
+      if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
+      const m = input.match(/(?:v=|v\/|embed\/|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+      if (m) return m[1];
+      const beforeQ = input.split('?')[0];
+      if (/^[A-Za-z0-9_-]{11}$/.test(beforeQ)) return beforeQ;
+      return "";
+    }
+
+    function findTrailerByTitle(title) {
+      if (!title) return "";
+      if (TRAILER_MAP[title]) return getYouTubeID(TRAILER_MAP[title]);
+      return "";
+    }
+
     /**** Delegasi klik: tombol +, play center, play corner ****/
     document.addEventListener('click', (e) => {
       // tombol favorite (+)
@@ -272,31 +304,58 @@
         return;
       }
 
-      // tombol Play di tengah (hover overlay)
+      // tombol Play di tengah (hover overlay) -> buka youtube
       const playCenter = e.target.closest('.btn-play-center');
       if (playCenter) {
-        const title = playCenter.dataset.title || 'Unknown';
-        // Contoh aksi: buka halaman play atau alert (ganti sesuai kebutuhan)
-        // window.location.href = player.html?title=${encodeURIComponent(title)};
-        alert('Play: ' + title);
+        const title = (playCenter.dataset.title || '').trim();
+
+        // coba ambil data-trailer dari card terdekat
+        const card = playCenter.closest('.poster-card');
+        let id = "";
+        if (card) {
+          const raw = (card.getAttribute('data-trailer') || '').trim();
+          id = getYouTubeID(raw);
+        }
+
+        // jika belum ada id, cari di TRAILER_MAP berdasarkan judul
+        if (!id) id = findTrailerByTitle(title);
+
+        if (!id) {
+          // buka hasil pencarian YouTube jika tidak ada id
+          window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(title + ' trailer'), '_blank', 'noopener');
+        } else {
+          window.open('https://www.youtube.com/watch?v=' + encodeURIComponent(id), '_blank', 'noopener');
+        }
         return;
       }
 
-      // tombol Play kecil di pojok
+      // tombol Play kecil di pojok (kalau nanti ada)
       const playCorner = e.target.closest('.btn-play-corner');
       if (playCorner) {
-        // cari kartu terdekat untuk dapat info
-        const parent = playCorner.closest('.poster-thumb');
-        const img = parent?.querySelector('img')?.getAttribute('src') || '';
-        const title = parent?.querySelector('.poster-title')?.textContent || parent?.getAttribute('aria-label') || 'Unknown';
-        alert('Play: ' + title.trim());
+        const posterThumb = playCorner.closest('.poster-thumb') || playCorner.closest('.poster-card');
+        const title = (posterThumb?.querySelector('.poster-title')?.textContent || posterThumb?.getAttribute('aria-label') || '').trim();
+
+        // coba ambil data-trailer dari article
+        const card = playCorner.closest('.poster-card');
+        let id = "";
+        if (card) {
+          const raw = (card.getAttribute('data-trailer') || '').trim();
+          id = getYouTubeID(raw);
+        }
+        if (!id) id = findTrailerByTitle(title);
+
+        if (!id) {
+          window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(title + ' trailer'), '_blank', 'noopener');
+        } else {
+          window.open('https://www.youtube.com/watch?v=' + encodeURIComponent(id), '_blank', 'noopener');
+        }
         return;
       }
     });
 
     /**** Prev/Next scroll untuk rail ****/
     document.addEventListener('DOMContentLoaded', () => {
-      renderRow('row-movies', movies);
+      renderRow('row-movies', series);
 
       const rail = document.querySelector('.trend-rail');
       const prev = document.getElementById('trendPrev');

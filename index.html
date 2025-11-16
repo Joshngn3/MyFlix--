@@ -318,5 +318,76 @@
   });
 </script>
 
+<script>
+/* ---------- helper: ambil YouTube ID dari URL atau ID mentah ---------- */
+function getYouTubeID(input) {
+  if (!input) return "";
+  input = String(input).trim();
+
+  // langsung jika sudah ID 11 karakter
+  if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
+
+  // coba cocokkan beberapa format URL YouTube (youtu.be/, watch?v=, embed/)
+  const re = /(?:youtu\.be\/|youtube\.com\/(?:watch\?.*v=|embed\/|v\/))([A-Za-z0-9_-]{11})/;
+  const m = input.match(re);
+  if (m && m[1]) return m[1];
+
+  // kadang ada param ?si=... setelah id pada short link => ambil bagian sebelum ?
+  // contoh: "01BPk6M37qs?si=foobar" -> ambil "01BPk6M37qs" (11 chars)
+  const beforeQ = input.split('?')[0];
+  if (/^[A-Za-z0-9_-]{11}$/.test(beforeQ)) return beforeQ;
+
+  return "";
+}
+
+/* ---------- daftar trailer per judul (isi sesuai kebutuhan) ---------- */
+const TRAILER_MAP = {
+  "Interstellar": "2LqzF5WauAw",
+  "Avatar": "5PSNL1qE6VY",
+  "Joker": "zAGVQLHvwOY",
+  "Black Panther": "xjDjIWPwcPU",
+  "Inception": "8hP9D6kZseM",
+  "Stranger Things": "b9EkMc79ZSU",
+  "Train to Busan": "1ovgxN2VWNc?si",
+  "The Lion King": "7TavVZMewpY",
+  "KKN di Desa Penari": "01BPk6M37qs?si",  // isi hanya ID (11 chars) lebih aman
+  "Jurassic Park": "QWBKEmWWL38"
+};
+
+/* ---------- event delegation: tangani klik Play di poster ---------- */
+document.addEventListener('click', function (e) {
+  // Hanya pilih tombol Play yang berada di dalam poster-card
+  const playSelector = '.poster-card .btn-accent, .poster-card .btn-play-inline, .poster-card .play-btn, .poster-card .btn-play';
+  const playBtn = e.target.closest(playSelector);
+  if (!playBtn) return;
+
+  // cari elemen poster-card induk
+  const card = playBtn.closest('.poster-card');
+  if (!card) return;
+
+  // Ambil judul (cari .poster-title) atau pakai data-title jika ada
+  const titleEl = card.querySelector('.poster-title');
+  const title = (titleEl && titleEl.textContent.trim()) || (card.dataset.title || '').trim();
+
+  // Cek atribut data-trailer di card (jika nanti kamu menambahkannya)
+  const rawTrailer = (card.getAttribute('data-trailer') || card.dataset.trailer || '').trim();
+  let id = getYouTubeID(rawTrailer);
+
+  // Jika belum ada dari data-trailer, gunakan TRAILER_MAP berdasarkan judul
+  if (!id && title && TRAILER_MAP[title]) id = getYouTubeID(TRAILER_MAP[title]);
+
+  // Jika tetap tidak ada ID -> buka hasil pencarian YouTube untuk "judul trailer"
+  if (!id) {
+    const q = title ? `${title} trailer` : 'movie trailer';
+    window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(q), '_blank', 'noopener');
+    return;
+  }
+
+  // Buka video di tab baru (YouTube)
+  const url = 'https://www.youtube.com/watch?v=' + encodeURIComponent(id);
+  window.open(url, '_blank', 'noopener');
+});
+</script>
+
 </body>
 </html>

@@ -163,12 +163,12 @@
       <p class="mb-4">Questions? Call 0823-4677-8105</p>
       <div class="row g-3">
         <div class="col-6 col-md-3 d-grid gap-2">
-          <a class="footer-link" href="#">Help Center</a>
-          <a class="footer-link" href="#">Cookie Preferences</a>
+          <a class="footer-link" href="help-center.html">Help Center</a>
+          <a class="footer-link" href="cookie-preferences.html">Cookie Preferences</a>
         </div>
         <div class="col-6 col-md-3 d-grid gap-2">
-          <a class="footer-link" href="#">Terms of Use</a>
-          <a class="footer-link" href="#">Contact Us</a>
+          <a class="footer-link" href="terms-of-use.html">Terms of Use</a>
+          <a class="footer-link" href="contact-use.html">Contact Us</a>
         </div>
       </div>
       <div class="mt-4">MyFlix Indonesia</div>
@@ -192,14 +192,35 @@
       { title: "Jurassic Park", img: "img/jurassicpark.jpg", eps: "1 Eps", isNew: true }
     ];
 
+    /**** Trailer map (pakai ID YouTube — pastikan cocok) ****/
+    const TRAILER_MAP = {
+      "Interstellar": "2LqzF5WauAw",
+      "Avatar": "5PSNL1qE6VY",
+      "Joker": "zAGVQLHvwOY",
+      "Black Panther": "xjDjIWPwcPU",
+      "Inception": "8hP9D6kZseM",
+      "Train to Busan": "pycj2sA-1eI",
+      "The Lion King": "7TavVZMewpY",
+      "KKN di Desa Penari": "01BPk6M37qs",
+      "Jurassic Park": "QWBKEmWWL38",
+      "Stranger Things": "b9EkMc79ZSU"
+    };
+
     /**** Rendering otomatis kartu poster ****/
     function renderRow(elementId, items) {
       const row = document.getElementById(elementId);
       row.innerHTML = "";
 
       items.forEach(movie => {
+        // jika TRAILER_MAP punya ID, set dataTrailer (hanya ID)
+        const dataTrailer = TRAILER_MAP[movie.title] ? ` data-trailer="${TRAILER_MAP[movie.title]}"` : '';
+
         const article = document.createElement('article');
         article.className = 'poster-card';
+        if (dataTrailer) {
+          // tambahkan atribut data-trailer ke elemen article
+          article.setAttribute('data-trailer', TRAILER_MAP[movie.title]);
+        }
 
         article.innerHTML = `
           <div class="poster-thumb" role="group" aria-label="${escapeHtml(movie.title)} poster">
@@ -255,6 +276,24 @@
       }
     })();
 
+    /**** Helper YouTube ID finder (bisa dari ID atau URL) ****/
+    function getYouTubeID(input) {
+      if (!input) return "";
+      input = String(input).trim();
+      if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
+      const m = input.match(/(?:v=|v\/|embed\/|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+      if (m) return m[1];
+      const beforeQ = input.split('?')[0];
+      if (/^[A-Za-z0-9_-]{11}$/.test(beforeQ)) return beforeQ;
+      return "";
+    }
+
+    function findTrailerByTitle(title) {
+      if (!title) return "";
+      if (TRAILER_MAP[title]) return getYouTubeID(TRAILER_MAP[title]);
+      return "";
+    }
+
     /**** Delegasi klik: tombol +, play center, play corner ****/
     document.addEventListener('click', (e) => {
       // tombol favorite (+)
@@ -270,24 +309,51 @@
         return;
       }
 
-      // tombol Play di tengah (hover overlay)
+      // tombol Play di tengah (hover overlay) -> buka youtube
       const playCenter = e.target.closest('.btn-play-center');
       if (playCenter) {
-        const title = playCenter.dataset.title || 'Unknown';
-        // Contoh aksi: buka halaman play atau alert (ganti sesuai kebutuhan)
-        // window.location.href = player.html?title=${encodeURIComponent(title)};
-        alert('Play: ' + title);
+        const title = (playCenter.dataset.title || '').trim();
+
+        // coba ambil data-trailer dari card terdekat
+        const card = playCenter.closest('.poster-card');
+        let id = "";
+        if (card) {
+          const raw = (card.getAttribute('data-trailer') || '').trim();
+          id = getYouTubeID(raw);
+        }
+
+        // jika belum ada id, cari di TRAILER_MAP berdasarkan judul
+        if (!id) id = findTrailerByTitle(title);
+
+        if (!id) {
+          // buka hasil pencarian YouTube jika tidak ada id
+          window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(title + ' trailer'), '_blank', 'noopener');
+        } else {
+          window.open('https://www.youtube.com/watch?v=' + encodeURIComponent(id), '_blank', 'noopener');
+        }
         return;
       }
 
-      // tombol Play kecil di pojok
+      // tombol Play kecil di pojok (kalau nanti ada)
       const playCorner = e.target.closest('.btn-play-corner');
       if (playCorner) {
-        // cari kartu terdekat untuk dapat info
-        const parent = playCorner.closest('.poster-thumb');
-        const img = parent?.querySelector('img')?.getAttribute('src') || '';
-        const title = parent?.querySelector('.poster-title')?.textContent || parent?.getAttribute('aria-label') || 'Unknown';
-        alert('Play: ' + title.trim());
+        const posterThumb = playCorner.closest('.poster-thumb') || playCorner.closest('.poster-card');
+        const title = (posterThumb?.querySelector('.poster-title')?.textContent || posterThumb?.getAttribute('aria-label') || '').trim();
+
+        // coba ambil data-trailer dari article
+        const card = playCorner.closest('.poster-card');
+        let id = "";
+        if (card) {
+          const raw = (card.getAttribute('data-trailer') || '').trim();
+          id = getYouTubeID(raw);
+        }
+        if (!id) id = findTrailerByTitle(title);
+
+        if (!id) {
+          window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(title + ' trailer'), '_blank', 'noopener');
+        } else {
+          window.open('https://www.youtube.com/watch?v=' + encodeURIComponent(id), '_blank', 'noopener');
+        }
         return;
       }
     });
