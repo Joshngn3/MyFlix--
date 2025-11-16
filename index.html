@@ -33,7 +33,7 @@
           <li class="nav-item"><a id="nav-series" class="nav-link" href="series.html">Series</a></li>
           <li class="nav-item"><a id="nav-mylist" class="nav-link" href="mylist.html">My List</a></li>
         </ul>
-        <a class="btn btn-outline-light btn-sm" href="login.html">
+        <a class="btn btn-outline-light btn-sm" href="login2.html">
           <i class="bi bi-person"></i> Sign In
         </a>
         </div>
@@ -41,24 +41,21 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container hero-content text-center">
-      <h1 class="display-4 fw-bold mb-3">Unlimited movies, TV series, and more.</h1>
-      <p class="lead mb-4">Watch anywhere. Cancel anytime.</p>
-      <form class="row g-2 justify-content-center email-form" onsubmit="event.preventDefault();">
-        <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-          <input type="email" required class="form-control form-control-lg" placeholder="Enter your email" />
-        </div>
-        <div class="col-auto">
-          <button class="btn btn-accent btn-lg">Get Started <i class="bi bi-chevron-right"></i></button>
-        </div>
-      </form>
-      <div class="mt-5 text-muted small">Ready to watch? Enter your email to create or restart your membership.</div>
-    </div>
-  </header>
+<!-- HERO -->
+<header class="hero">
+  <div class="container hero-content text-center">
+    <h1 class="display-4 fw-bold mb-3">Unlimited movies, TV series, and more.</h1>
+    <p class="lead mb-4">Watch anywhere. Cancel anytime.</p>
 
-  <!-- TRENDING (row horizontal tanpa ranking) -->
+    <!-- BUTTON CENTER FIX -->
+    <div class="text-center">
+      <a href="login2.html" class="btn btn-accent btn-lg px-4">Get Started</a>
+    </div>
+
+  </div>
+</header>
+
+  <!-- TRENDING -->
 <section class="section">
   <div class="d-flex justify-content-between align-items-center mb-2">
     <div class="row-title m-0">Trending Now</div>
@@ -75,14 +72,14 @@
   <div class="trend-rail">
     <!-- Poster statis: tinggal ganti src & judul -->
     <article class="poster-card">
-      <img src="img/interstellar.jpeg" alt="Interstellar">
+      <img src="img/interstellar.jpg" alt="Interstellar">
       <div class="poster-overlay">
         <div>
           <div class="poster-title">Interstellar</div>
           <div class="poster-actions">
             <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
             <button class="btn btn-outline-light btn-sm btn-fav"
-                    data-title="Interstellar" data-img="img/interstellar.jpeg">
+                    data-title="Interstellar" data-img="img/interstellar.jpg">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -91,14 +88,14 @@
     </article>
 
     <article class="poster-card">
-      <img src="img/avatar.jpeg" alt="Avatar">
+      <img src="img/avatar.jpg" alt="Avatar">
       <div class="poster-overlay">
         <div>
           <div class="poster-title">Avatar</div>
           <div class="poster-actions">
             <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
             <button class="btn btn-outline-light btn-sm btn-fav"
-                    data-title="Avatar" data-img="img/avatar.jpeg">
+                    data-title="Avatar" data-img="img/avatar.jpg">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -107,14 +104,14 @@
     </article>
 
     <article class="poster-card">
-      <img src="img/joker.jpeg" alt="Joker">
+      <img src="img/joker.jpg" alt="Joker">
       <div class="poster-overlay">
         <div>
           <div class="poster-title">Joker</div>
           <div class="poster-actions">
             <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
             <button class="btn btn-outline-light btn-sm btn-fav"
-                    data-title="Joker" data-img="img/joker.jpeg">
+                    data-title="Joker" data-img="img/joker.jpg">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -123,14 +120,14 @@
     </article>
 
     <article class="poster-card">
-      <img src="img/blackpanther.jpeg" alt="Black Panther">
+      <img src="img/blackphanter.jpg" alt="Black Panther">
       <div class="poster-overlay">
         <div>
           <div class="poster-title">Black Panther</div>
           <div class="poster-actions">
             <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
             <button class="btn btn-outline-light btn-sm btn-fav"
-                    data-title="Black Panther" data-img="img/blackpanther.jpeg">
+                    data-title="Black Panther" data-img="img/blackphanter.jpg">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -139,14 +136,14 @@
     </article>
 
     <article class="poster-card">
-      <img src="img/inception.jpeg" alt="Inception">
+      <img src="img/inception.jpg" alt="Inception">
       <div class="poster-overlay">
         <div>
           <div class="poster-title">Inception</div>
           <div class="poster-actions">
             <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
             <button class="btn btn-outline-light btn-sm btn-fav"
-                    data-title="Inception" data-img="img/inception.jpeg">
+                    data-title="Inception" data-img="img/inception.jpg">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -155,14 +152,14 @@
     </article>
 
     <article class="poster-card">
-      <img src="img/strangerthings.jpeg" alt="Stranger Things">
+      <img src="img/strangerthings.jpg" alt="Stranger Things">
       <div class="poster-overlay">
         <div>
           <div class="poster-title">Stranger Things</div>
           <div class="poster-actions">
             <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
             <button class="btn btn-outline-light btn-sm btn-fav"
-                    data-title="Stranger Things" data-img="img/strangerthings.jpeg">
+                    data-title="Stranger Things" data-img="img/strangerthings.jpg">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -170,7 +167,7 @@
       </div>
     </article>
 
-        <article class="poster-card">
+    <article class="poster-card">
       <img src="img/traintobusan.jpg" alt="Train to Busan">
       <div class="poster-overlay">
         <div>
@@ -179,6 +176,51 @@
             <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
             <button class="btn btn-outline-light btn-sm btn-fav"
                     data-title="Train to Busan" data-img="img/traintobusan.jpg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+        <article class="poster-card">
+      <img src="img/thelionking.jpg" alt="Train to Busan">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">The Lion King</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="The Lion King" data-img="img/thelionking.jpg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+        <article class="poster-card">
+      <img src="img/kkndesapenari.jpg" alt="Train to Busan">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">KKN di Desa Penari</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="KKN di Desa Penari" data-img="img/kkndesapenari.jpg">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+        <article class="poster-card">
+      <img src="img/jurassicpark.jpg" alt="Train to Busan">
+      <div class="poster-overlay">
+        <div>
+          <div class="poster-title">Jurassic Park</div>
+          <div class="poster-actions">
+            <button class="btn btn-accent btn-sm"><i class="bi bi-play-fill"></i> Play</button>
+            <button class="btn btn-outline-light btn-sm btn-fav"
+                    data-title="Jurassic Park" data-img="img/jurassicpark.jpg">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -209,36 +251,19 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="mt-5 py-5">
+  <footer class="mt-5 pb-5">
     <div class="container small">
-      <p class="mb-4">Questions? Call 0800-123-456 (demo)</p>
       <div class="row g-3">
         <div class="col-6 col-md-3 d-grid gap-2">
-          <a class="footer-link" href="#">FAQ</a>
-          <a class="footer-link" href="#">Investor Relations</a>
-          <a class="footer-link" href="#">Privacy</a>
-          <a class="footer-link" href="#">Speed Test</a>
+          <a class="footer-link text-decoration-none text-light" href="help-center.html">Help Center</a>
+          <a class="footer-link text-decoration-none text-light" href="cookie-preferences.html">Cookie Preferences</a>
         </div>
         <div class="col-6 col-md-3 d-grid gap-2">
-          <a class="footer-link" href="#">Help Center</a>
-          <a class="footer-link" href="#">Jobs</a>
-          <a class="footer-link" href="#">Cookie Preferences</a>
-          <a class="footer-link" href="#">Legal Notices</a>
-        </div>
-        <div class="col-6 col-md-3 d-grid gap-2">
-          <a class="footer-link" href="#">Account</a>
-          <a class="footer-link" href="#">Ways to Watch</a>
-          <a class="footer-link" href="#">Corporate Info</a>
-          <a class="footer-link" href="#">Only on MyFlix</a>
-        </div>
-        <div class="col-6 col-md-3 d-grid gap-2">
-          <a class="footer-link" href="#">Media Center</a>
-          <a class="footer-link" href="#">Terms of Use</a>
-          <a class="footer-link" href="#">Contact Us</a>
+          <a class="footer-link text-decoration-none text-light" href="terms-of-use.html">Terms of Use</a>
+          <a class="footer-link text-decoration-none text-light" href="contact-use.html">Contact Us</a>
         </div>
       </div>
-      <div class="mt-4">MyFlix Indonesia (Demo)</div>
+      <div class="mt-4"><a href="index.html" class="text-decoration-none text-light">MyFlix Indonesia</a></div>
     </div>
   </footer>
 

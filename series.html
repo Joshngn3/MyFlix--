@@ -4,15 +4,118 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MyFlix — Series</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f0f11;
+      --muted:#bfc3c8;
+      --accent:#57d3e6;
+      --poster-radius:12px;
+      --play-btn-bg:#e53935;
+    }
+
+    html,body { height:100%; }
+    body{
+      background:var(--bg);
+      color:#fff;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    .navbar { background:#0b0b0c; border-bottom: 1px solid rgba(255,255,255,0.02); }
+    .row-title { font-weight:700; font-size:1.02rem; color:#fff; }
+
+    /* RAIL → padat */
+    .trend-rail {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: start;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scroll-behavior: smooth;
+      padding-top: 6px;
+      padding-bottom: 12px;
+    }
+
+    @media (max-width: 1100px){ .trend-rail { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 700px){ .trend-rail { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px){ .trend-rail { grid-template-columns: repeat(2, 1fr); gap:10px; } }
+
+    .poster-card { display:flex; flex-direction:column; gap:6px; align-items:start; background:transparent; }
+
+    .poster-thumb {
+      position: relative;
+      width:100%;
+      border-radius: var(--poster-radius);
+      overflow: hidden;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+      min-height: 140px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
+    }
+
+    .poster-thumb img { width:100%; height:100%; object-fit:cover; aspect-ratio: 2/3; display:block; }
+
+    .badge-new {
+      position: absolute; left:8px; top:8px;
+      background:var(--accent); color:#021016; font-weight:700;
+      font-size:0.72rem; padding:5px 8px; border-radius:8px; z-index:6;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+    }
+
+    .eps-count {
+      position: absolute; left:8px; bottom:8px;
+      color:#fff; font-weight:700; font-size:0.92rem; padding:5px 8px;
+      background: rgba(0,0,0,0.28); border-radius:8px; z-index:6;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+
+    .poster-actions {
+      position: absolute; right:8px; top:8px; display:flex; gap:6px; z-index:6;
+    }
+    .poster-actions .btn { padding:5px 7px; border-radius:8px; font-size:0.92rem; }
+
+    /* Play overlay center yang muncul saat hover */
+    .play-overlay {
+      position:absolute; inset:0; z-index:5;
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transform: scale(.97);
+      transition: opacity .18s ease, transform .18s ease;
+      background: rgba(0,0,0,0.22); backdrop-filter: blur(1px);
+    }
+    .poster-thumb:hover .play-overlay { opacity:1; transform: scale(1); }
+
+    .play-overlay .btn-play-center {
+      background: var(--play-btn-bg); border: none;
+      color: #fff; padding:10px 16px; font-weight:700; border-radius:10px;
+      display:inline-flex; gap:8px; align-items:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+    .play-overlay .btn-play-center i { font-size:1.1rem; }
+
+    .poster-title {
+      font-weight:700; font-size:0.88rem; color:#fff; line-height:1.12; margin:0;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .poster-sub { font-size:0.78rem; color:var(--muted); margin-top:3px; }
+
+    .btn-fav.btn-light { color:#021016; }
+
+    footer { color:var(--muted); background:transparent; border-top: 1px solid rgba(255,255,255,0.02); padding-top:24px; padding-bottom:40px; }
+    main.container { padding-top:92px; padding-bottom:20px; }
+
+    /* navbar transparan + blur */
+.navbar {
+  background: rgba(0,0,0,0.18) !important;   /* transparan */
+  backdrop-filter: blur(6px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(6px) saturate(120%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+  </style>
 </head>
 <body>
-   <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
     <a class="navbar-brand fw-bold text-danger" href="index.html">
@@ -36,63 +139,185 @@
       </ul>
 
       <!-- ms-auto TIDAK perlu (karena me-auto di kiri sudah cukup) -->
-<a class="btn btn-outline-light btn-sm" href="login.html">
+<a class="btn btn-outline-light btn-sm" href="login2.html">
   <i class="bi bi-person"></i> Sign In
 </a>
       </div>
     </div>
   </div>
 </nav>
-  <!-- ... gunakan snippet navbar yang sama ... -->
 
   <main class="container">
-    <section id="series" class="section">
-      <div class="row-title">Top TV Series</div>
-      <div class="scroll-row" id="row-series"></div>
+    <section class="section mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="row-title m-0">Popular Series</div>
+        <div class="d-flex gap-2">
+        </div>
+      </div>
+
+      <div id="row-movies" class="trend-rail" tabindex="0" aria-label="Popular Movies list">
+        <!-- cards akan di-render oleh JS -->
+      </div>
     </section>
   </main>
 
-<footer class="mt-5 py-5">
-  <div class="container small">
-    <p class="mb-4">Questions? Call 0800-123-456 (demo)</p>
-    <div class="row g-3">
-      <div class="col-6 col-md-3 d-grid gap-2">
-        <a class="footer-link" href="#">FAQ</a>
-        <a class="footer-link" href="#">Investor Relations</a>
-        <a class="footer-link" href="#">Privacy</a>
-        <a class="footer-link" href="#">Speed Test</a>
+  <!-- FOOTER -->
+  <footer class="mt-5 py-5">
+    <div class="container small">
+      <p class="mb-4">Questions? Call 0823-4677-8105</p>
+      <div class="row g-3">
+        <div class="col-6 col-md-3 d-grid gap-2">
+          <a class="footer-link" href="#">Help Center</a>
+          <a class="footer-link" href="#">Cookie Preferences</a>
+        </div>
+        <div class="col-6 col-md-3 d-grid gap-2">
+          <a class="footer-link" href="#">Terms of Use</a>
+          <a class="footer-link" href="#">Contact Us</a>
+        </div>
       </div>
-      <div class="col-6 col-md-3 d-grid gap-2">
-        <a class="footer-link" href="#">Help Center</a>
-        <a class="footer-link" href="#">Jobs</a>
-        <a class="footer-link" href="#">Cookie Preferences</a>
-        <a class="footer-link" href="#">Legal Notices</a>
-      </div>
-      <div class="col-6 col-md-3 d-grid gap-2">
-        <a class="footer-link" href="#">Account</a>
-        <a class="footer-link" href="#">Ways to Watch</a>
-        <a class="footer-link" href="#">Corporate Info</a>
-        <a class="footer-link" href="#">Only on MyFlix</a>
-      </div>
-      <div class="col-6 col-md-3 d-grid gap-2">
-        <a class="footer-link" href="#">Media Center</a>
-        <a class="footer-link" href="#">Terms of Use</a>
-        <a class="footer-link" href="#">Contact Us</a>
-      </div>
+      <div class="mt-4">MyFlix Indonesia</div>
     </div>
-    <div class="mt-4">MyFlix Indonesia (Demo)</div>
-  </div>
-</footer>
+  </footer>
 
   <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+
   <script>
-    function refreshRows(){
-      renderRow('row-series', series);
+    /**** DATA (daftar film yang kamu kirim) ****/
+    const movies = [
+      { title: "Stranger Things", img: "img/strangerthings.jpg", eps: "8 Eps", isNew: true },
+      { title: "Stranger Things 2", img: "img/strangerthings2.jpg", eps: "9 Eps", isNew: true },
+      { title: "Stranger Things 3", img: "img/strangerthings3.jpg", eps: "8 Eps", isNew: true },
+      { title: "Stranger Things 4", img: "img/strangerthings4.jpg", eps: "9 Eps", isNew: true },
+      { title: "Stranger Things 5", img: "img/strangerthings5.jpg", eps: "8 Eps", isNew: true },
+      { title: "The Witcher", img: "img/thewithcer.jpg", eps: "8 Eps", isNew: true },
+      { title: "The Witcher 2", img: "img/thewithcer2.jpg", eps: "8 Eps", isNew: true },
+    ];
+
+    /**** Rendering otomatis kartu poster ****/
+    function renderRow(elementId, items) {
+      const row = document.getElementById(elementId);
+      row.innerHTML = "";
+
+      items.forEach(movie => {
+        const article = document.createElement('article');
+        article.className = 'poster-card';
+
+        article.innerHTML = `
+          <div class="poster-thumb" role="group" aria-label="${escapeHtml(movie.title)} poster">
+            <img src="${escapeHtml(movie.img)}" alt="${escapeHtml(movie.title)}">
+            ${movie.isNew ? '<div class="badge-new">New</div>' : ''}
+            <div class="eps-count">${escapeHtml(movie.eps)}</div>
+
+            <div class="poster-actions">
+              <button class="btn btn-outline-light btn-sm btn-fav" data-title="${escapeHtml(movie.title)}" data-img="${escapeHtml(movie.img)}" title="Add to My List">
+                <i class="bi bi-plus-lg"></i>
+              </button>
+            </div>
+
+            <div class="play-overlay">
+              <button class="btn-play-center" data-title="${escapeHtml(movie.title)}">
+                <i class="bi bi-play-fill"></i> Play
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="poster-title">${escapeHtml(movie.title)}</div>
+            <div class="poster-sub">${escapeHtml(movie.eps)}</div>
+          </div>
+        `;
+
+        row.appendChild(article);
+      });
     }
-    document.addEventListener('DOMContentLoaded', refreshRows);
+
+    // helper escape untuk judul/img
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(s) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[s];
+      });
+    }
+
+    /**** Favorites fallback API menggunakan localStorage (tetap ada) ****/
+    (function ensureFavAPI(){
+      if (typeof window.getFavorites !== 'function') {
+        const FAV_KEY = 'myflix:favorites';
+        window.getFavorites = () => JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+        window.setFavorites = (arr) => localStorage.setItem(FAV_KEY, JSON.stringify(arr));
+        window.isFav = (item) => getFavorites().some(f => f.img === item.img && f.title === item.title);
+        window.toggleFav = (item) => {
+          const favs = getFavorites();
+          const idx = favs.findIndex(f => f.img === item.img && f.title === item.title);
+          if (idx === -1) favs.push(item); else favs.splice(idx, 1);
+          setFavorites(favs);
+        };
+        console.warn('[FavAPI] memakai fallback lokalStorage sederhana.');
+      }
+    })();
+
+    /**** Delegasi klik: tombol +, play center, play corner ****/
+    document.addEventListener('click', (e) => {
+      // tombol favorite (+)
+      const favBtn = e.target.closest('.btn-fav');
+      if (favBtn) {
+        const item = { title: favBtn.dataset.title, img: favBtn.dataset.img };
+        toggleFav(item);
+        const added = isFav(item);
+        const icon = favBtn.querySelector('i');
+        if (icon) icon.className = added ? 'bi bi-check-lg' : 'bi bi-plus-lg';
+        favBtn.classList.toggle('btn-outline-light', !added);
+        favBtn.classList.toggle('btn-light', added);
+        return;
+      }
+
+      // tombol Play di tengah (hover overlay)
+      const playCenter = e.target.closest('.btn-play-center');
+      if (playCenter) {
+        const title = playCenter.dataset.title || 'Unknown';
+        // Contoh aksi: buka halaman play atau alert (ganti sesuai kebutuhan)
+        // window.location.href = player.html?title=${encodeURIComponent(title)};
+        alert('Play: ' + title);
+        return;
+      }
+
+      // tombol Play kecil di pojok
+      const playCorner = e.target.closest('.btn-play-corner');
+      if (playCorner) {
+        // cari kartu terdekat untuk dapat info
+        const parent = playCorner.closest('.poster-thumb');
+        const img = parent?.querySelector('img')?.getAttribute('src') || '';
+        const title = parent?.querySelector('.poster-title')?.textContent || parent?.getAttribute('aria-label') || 'Unknown';
+        alert('Play: ' + title.trim());
+        return;
+      }
+    });
+
+    /**** Prev/Next scroll untuk rail ****/
+    document.addEventListener('DOMContentLoaded', () => {
+      renderRow('row-movies', movies);
+
+      const rail = document.querySelector('.trend-rail');
+      const prev = document.getElementById('trendPrev');
+      const next = document.getElementById('trendNext');
+      if (rail && prev && next) {
+        const step = () => Math.max(rail.clientWidth * 0.6, 240);
+        prev.addEventListener('click', (e) => { e.preventDefault(); rail.scrollBy({left:-step(),behavior:'smooth'}); });
+        next.addEventListener('click', (e) => { e.preventDefault(); rail.scrollBy({left: step(),behavior:'smooth'}); });
+      }
+
+      // restore favorite button states (jika sudah ada di localStorage)
+      const favs = getFavorites();
+      document.querySelectorAll('.btn-fav').forEach(btn => {
+        const item = { title: btn.dataset.title, img: btn.dataset.img };
+        const added = favs.some(f => f.title === item.title && f.img === item.img);
+        const icon = btn.querySelector('i');
+        if (icon) icon.className = added ? 'bi bi-check-lg' : 'bi bi-plus-lg';
+        btn.classList.toggle('btn-outline-light', !added);
+        btn.classList.toggle('btn-light', added);
+      });
+    });
   </script>
 </body>
 </html>

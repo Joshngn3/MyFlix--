@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Help Center — MyFlix</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background:#0f0f11;
+      color:#fff;
+      font-family: system-ui, Segoe UI, Roboto, Arial;
+    }
+
+    .navbar {
+      background:#0b0b0c;
+    }
+
+    main.container {
+      padding-top:90px;
+      padding-bottom:60px;
+    }
+
+    /* Perbaikan panel agar tidak menyatu dengan background */
+    .card {
+      background:#151518;
+      border:0;
+      border-radius:10px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.6);
+    }
+
+    /* Teks muted jadi abu terang */
+    .text-muted {
+      color:#cfd3d8 !important;
+    }
+
+    /* Judul panel */
+    h5, h6 {
+      color: #ffffff;
+      font-weight:600;
+    }
+
+    .faq-item + .faq-item {
+      margin-top:16px;
+    }
+
+    a.footer-link {
+      color:#cfd3d8;
+    }
+
+    /* Sidebar card */
+    aside .card {
+      background:#17181b;
+    }
+
+    aside .card h6 {
+      font-weight:700;
+      color:#fff;
+    }
+
+    aside .card p,
+    aside .card li {
+      color:#d4d7db !important;
+    }
+
+    /* Link sidebar */
+    aside a {
+      color:#fff !important;
+      text-decoration:none;
+    }
+
+    aside a:hover {
+      text-decoration:underline;
+    }
+
+    .navbar {
+  background: rgba(0,0,0,0.18) !important;   /* transparan */
+  backdrop-filter: blur(6px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(6px) saturate(120%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-danger" href="index.html">
+        <i class="bi bi-camera-reels-fill me-1"></i>MyFlix
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-2 me-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="movies.html">Movies</a></li>
+          <li class="nav-item"><a class="nav-link" href="series.html">Series</a></li>
+          <li class="nav-item"><a class="nav-link" href="mylist.html">My List</a></li>
+        </ul>
+
+        <a class="btn btn-outline-light btn-sm" href="login2.html"><i class="bi bi-person"></i> Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="container">
+    <div class="row g-4">
+      <!-- LEFT CONTENT -->
+      <div class="col-12 col-lg-8">
+        <h1 class="mb-3">Help Center</h1>
+        <p class="text-muted">Temukan jawaban untuk pertanyaan umum tentang akun, pembayaran, pemutaran, dan lainnya.</p>
+
+        <!-- TOPIK POPULER -->
+        <section class="card p-3 mb-3">
+          <h5>Topik Populer</h5>
+          <ul class="list-unstyled mt-2">
+            <li class="mb-2"><a href="#account" class="text-light text-decoration-none">Mengelola akun</a></li>
+            <li class="mb-2"><a href="#billing" class="text-light text-decoration-none">Pembayaran & tagihan</a></li>
+            <li class="mb-2"><a href="#playback" class="text-light text-decoration-none">Masalah pemutaran</a></li>
+            <li class="mb-2"><a href="#device" class="text-light text-decoration-none">Perangkat & kompatibilitas</a></li>
+          </ul>
+        </section>
+
+        <!-- FAQ -->
+        <section id="account" class="card p-3 faq-item">
+          <h6>Apa cara mengganti email atau password?</h6>
+          <p class="text-muted mb-0">Masuk ke halaman <strong>Account</strong> setelah login → pilih <em>Profile</em> → Edit Email / Password. Jika kesulitan, hubungi kami melalui formulir kontak.</p>
+        </section>
+
+        <section id="billing" class="card p-3 faq-item">
+          <h6>Bagaimana melihat riwayat pembayaran?</h6>
+          <p class="text-muted mb-0">Buka <strong>Account & Billing</strong> untuk melihat invoice dan riwayat transaksi.</p>
+        </section>
+
+        <section id="playback" class="card p-3 faq-item">
+          <h6>Video lag atau tidak mau diputar, apa yang harus saya lakukan?</h6>
+          <ol class="text-muted">
+            <li>Periksa koneksi internet.</li>
+            <li>Refresh halaman atau restart aplikasi.</li>
+            <li>Hapus cache browser dan coba lagi.</li>
+            <li>Jika tetap, hubungi kami via <a href="contact-us.html" class="text-light text-decoration-none">Contact Us</a>.</li>
+          </ol>
+        </section>
+
+        <section id="device" class="card p-3 faq-item">
+          <h6>Perangkat apa saja yang didukung?</h6>
+          <p class="text-muted mb-0">MyFlix mendukung browser modern (Chrome/Firefox/Edge/Safari) dan sebagian besar smart TV / mobile apps. Pastikan perangkat menggunakan versi software terbaru.</p>
+        </section>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="col-12 col-lg-4">
+        <div class="card p-3 mb-3">
+          <h6>Butuh bantuan cepat?</h6>
+          <p class="text-muted">Gunakan formulir kontak atau telepon kami.</p>
+          <p class="mb-1"><strong>Call:</strong> 
+            <a href="tel:082346778105" class="text-light text-decoration-none">0823-4677-8105</a>
+          </p>
+          <a href="contact-use.html" class="btn btn-outline-light btn-sm mt-2">Hubungi Kami</a>
+        </div>
+
+        <div class="card p-3">
+          <h6>Panduan</h6>
+          <ul class="list-unstyled">
+            <li><a href="terms-of-use.html" class="text-light text-decoration-none">Terms of Use</a></li>
+            <li><a href="cookie-preferences.html" class="text-light text-decoration-none">Cookie Preferences</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="mt-5 pb-5">
+    <div class="container small">
+      <div class="row g-3">
+        <div class="col-6 col-md-3 d-grid gap-2">
+          <a class="footer-link text-decoration-none text-light" href="help-center.html">Help Center</a>
+          <a class="footer-link text-decoration-none text-light" href="cookie-preferences.html">Cookie Preferences</a>
+        </div>
+        <div class="col-6 col-md-3 d-grid gap-2">
+          <a class="footer-link text-decoration-none text-light" href="terms-of-use.html">Terms of Use</a>
+          <a class="footer-link text-decoration-none text-light" href="contact-use.html">Contact Us</a>
+        </div>
+      </div>
+      <div class="mt-4"><a href="index.html" class="text-decoration-none text-light">MyFlix Indonesia</a></div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -29,25 +29,65 @@
       box-shadow:0 20px 60px rgba(0,0,0,.6);
       backdrop-filter:saturate(120%) blur(2px);
     }
+
+    /* === INPUT & PLACEHOLDER FIX === */
     .login-card .form-control{
-      background:#2b2b2b; border:1px solid #444; color:#fff;
+      background:#2b2b2b;
+      border:1px solid #444;
+      color:#fff; /* teks input */
     }
-    .login-card .form-control:focus{border-color:#777; box-shadow:none}
+
+    /* Placeholder dibuat terang */
+    .login-card .form-control::placeholder{
+      color:#d8d8d8 !important;
+      opacity:1 !important;
+    }
+
+    /* Saat focus */
+    .login-card .form-control:focus{
+      border-color:#999 !important;
+      box-shadow:0 0 0 2px rgba(255,255,255,0.1) !important;
+      background:#2f2f2f !important;
+      color:#fff !important;
+    }
+
     .login-muted{color:#b3b3b3; font-size:.9rem}
     .btn-accent{background:#e50914; border:none; color:#fff}
     .btn-accent:hover{background:#f6121d}
+
+    /* Navbar login tipis */
+.login-navbar {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  height: auto !important;
+  min-height: 40px !important;
+}
+
+/* Hilangkan padding ekstra dari container */
+.login-navbar .container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Pastikan brand tidak menambah tinggi */
+.login-navbar .navbar-brand {
+  line-height: 1 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
   </style>
 </head>
 <body class="bg-black">
 
-  <!-- NAVBAR (opsional) -->
-  <nav class="navbar navbar-dark">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-danger" href="index.html">
-        <i class="bi bi-camera-reels-fill me-1"></i>MyFlix
-      </a>
-    </div>
-  </nav>
+<nav class="navbar navbar-dark w-100 login-navbar">
+  <div class="container d-flex justify-content-center">
+    <a class="navbar-brand fw-bold text-danger" 
+       href="index.html"
+       style="font-size:2rem; letter-spacing:1px;">
+      <i class="bi bi-camera-reels-fill me-2"></i>MyFlix
+    </a>
+  </div>
+</nav>
 
   <main class="login-hero d-flex align-items-center">
     <div class="container d-flex justify-content-center">
@@ -55,10 +95,13 @@
         <h2 class="fw-bold mb-3">Sign In</h2>
 
         <div class="mb-3">
-          <input type="email" class="form-control form-control-lg" placeholder="Email atau nomor ponsel" required>
+          <input type="email" class="form-control form-control-lg"
+                 placeholder="Email atau nomor ponsel" required>
         </div>
+
         <div class="mb-2">
-          <input type="password" class="form-control form-control-lg" placeholder="Password" required>
+          <input type="password" class="form-control form-control-lg"
+                 placeholder="Password" required>
         </div>
 
         <button class="btn btn-accent w-100 btn-lg mt-2">Sign In</button>
@@ -87,8 +130,7 @@
   <script>
     document.getElementById('loginForm').addEventListener('submit', (e)=>{
       e.preventDefault();
-      alert('Kamu berhasil login');
-      // redirect balik ke home (opsional)
+      alert('Kamu berhasil login!');
       window.location.href = 'index.html';
     });
   </script>
